@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     fun showMessage(message:String){
         Log.i(TAG, message)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        val obj:ConstraintLayout?=findViewById(R.id.mainconstraint)
+        if(obj!=null){
+            Snackbar.make(obj,message,Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onStart() {
@@ -21,9 +27,30 @@ class MainActivity : AppCompatActivity() {
         showMessage("onStart method is called")
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        showMessage("onRestart method is called")
+    }
+
     override fun onResume() {
         super.onResume()
+        showMessage("onResume method is called")
         
+    }
+
+    override fun onPause() {
+        super.onPause()
+        showMessage("onPause method is called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        showMessage("onStop method is called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showMessage("onDestroy method is called")
     }
     val TAG="MainActivity"
 }
